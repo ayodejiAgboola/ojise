@@ -1,5 +1,6 @@
 package com.aretesoft.api;
 
+import com.aretesoft.dao.JobDao;
 import com.aretesoft.dao.UserDao;
 import com.aretesoft.model.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by Ayodeji.Agboola on 3/27/2017.
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/ojise")
 public class OjiseApi {
 private UserDao userDao;
+private JobDao jobDao;
 @Autowired
 private JavaMailSender mailSender;
 public OjiseApi(UserDao userDao){
@@ -59,4 +62,12 @@ public void sendMail(User user){
         return null;
     }
     }
+    @PostMapping("/jobs")
+    public List<Job> listJobs(){
+        return (List<Job>) jobDao.findAll();
+    }
+    /*@PostMapping("/postjob")
+    public Job postJob(){
+
+           }*/
 }

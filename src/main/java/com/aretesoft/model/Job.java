@@ -23,4 +23,107 @@ public class Job {
     private String expectedPrice;
     private String proposedPrice;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getFreelancer() {
+        return freelancer;
+    }
+
+    public void setFreelancer(String freelancer) {
+        this.freelancer = freelancer;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getAssignedDate() {
+        return assignedDate;
+    }
+
+    public void setAssignedDate(String assignedDate) {
+        this.assignedDate = assignedDate;
+    }
+
+    public String getCompleteDate() {
+        return CompleteDate;
+    }
+
+    public void setCompleteDate(String completeDate) {
+        CompleteDate = completeDate;
+    }
+
+    public String getExpectedCompleteDate() {
+        return expectedCompleteDate;
+    }
+
+    public void setExpectedCompleteDate(String expectedCompleteDate) {
+        this.expectedCompleteDate = expectedCompleteDate;
+    }
+
+    public String getProposedCompleteDate() {
+        return proposedCompleteDate;
+    }
+
+    public void setProposedCompleteDate(String proposedCompleteDate) {
+        this.proposedCompleteDate = proposedCompleteDate;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getExpectedPrice() {
+        return expectedPrice;
+    }
+
+    public void setExpectedPrice(String expectedPrice) {
+        this.expectedPrice = expectedPrice;
+    }
+
+    public String getProposedPrice() {
+        return proposedPrice;
+    }
+
+    public void setProposedPrice(String proposedPrice) {
+        this.proposedPrice = proposedPrice;
+    }
 }
