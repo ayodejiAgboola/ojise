@@ -17,11 +17,13 @@ public class User {
     @Indexed(unique=true)
     private String email;
     private String active;
-public User(String username, String password, String email,String active){
+    private String userType;
+public User(String username, String password, String email,String active, String userType){
     this.setUsername(username);
     this.setPassword(password);
     this.setEmail(email);
     this.setActive(active);
+    this.setUserType(userType);
 }
 
     public String getId() {
@@ -62,5 +64,13 @@ public User(String username, String password, String email,String active){
 
     public void setActive(String active) {
         this.active = active;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

@@ -22,7 +22,14 @@ public class Job {
     private String price;
     private String expectedPrice;
     private String proposedPrice;
-
+    public Job(String title, String description, String client, String createdDate, String expectedCompleteDate, String expectedPrice){
+        this.title=title;
+        this.description=description;
+        this.client=client;
+        this.createdDate=createdDate;
+        this.expectedCompleteDate=expectedCompleteDate;
+        this.expectedPrice=expectedPrice;
+    }
     public String getId() {
         return id;
     }

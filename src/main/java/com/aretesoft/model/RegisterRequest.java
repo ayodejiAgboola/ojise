@@ -7,6 +7,7 @@ public class RegisterRequest {
    private String username;
    private String password;
    private String email;
+   private String userType;
 
     public String getUsername() {
         return username;
@@ -30,5 +31,13 @@ public class RegisterRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

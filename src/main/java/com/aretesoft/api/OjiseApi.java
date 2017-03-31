@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,15 +23,17 @@ private UserDao userDao;
 private JobDao jobDao;
 @Autowired
 private JavaMailSender mailSender;
-public OjiseApi(UserDao userDao){
+public OjiseApi(UserDao userDao, JobDao jobDao){
     this.userDao=userDao;
+    this.jobDao=jobDao;
 }
 @PostMapping("/register")
     public RegisterResponse register(@RequestBody RegisterRequest request){
 String username = request.getUsername();
 String password = BCrypt.hashpw(request.getPassword(),BCrypt.gensalt());
 String email = request.getEmail();
-    User user = new User(username,password,email,"0");
+String userType = request.getUserType();
+    User user = new User(username,password,email,"0",userType);
     userDao.save(user);
     //sendMail(userDao.findByUsername(username));
     return new RegisterResponse(userDao.findByUsername(username));
@@ -56,7 +59,7 @@ public void sendMail(User user){
     boolean passwordIsCorrect = BCrypt.checkpw(password,user.getPassword());
     if(passwordIsCorrect){
         session.setAttribute("loginStatus", true);
-        session.setAttribute("user",user);
+        session.setAttribute("user",user.getId());
         return new LoginResponse(user);
     }else{
         return null;
@@ -66,8 +69,10 @@ public void sendMail(User user){
     public List<Job> listJobs(){
         return (List<Job>) jobDao.findAll();
     }
-    /*@PostMapping("/postjob")
-    public Job postJob(){
-
-           }*/
+    @PostMapping("/postjob")
+    public PostJobResponse postJob(@RequestBody PostJobRequest request, HttpSession session){
+        Job job = new Job(request.getTitle(),request.getDescription(),session.getAttribute("user").toString(),new Date().toString(),request.getExpectedCompleteDate(),request.getExpectedPrice());
+        jobDao.save(job);
+        return new PostJobResponse(job);
+           }
 }
