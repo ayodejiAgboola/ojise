@@ -8,6 +8,7 @@ public class PostJobRequest {
     private String description;
     private String expectedPrice;
     private String expectedCompleteDate;
+    private String category;
 
     public String getTitle() {
         return title;
@@ -39,5 +40,13 @@ public class PostJobRequest {
 
     public void setExpectedCompleteDate(String expectedCompleteDate) {
         this.expectedCompleteDate = expectedCompleteDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

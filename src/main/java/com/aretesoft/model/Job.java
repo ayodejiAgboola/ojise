@@ -22,13 +22,15 @@ public class Job {
     private String price;
     private String expectedPrice;
     private String proposedPrice;
-    public Job(String title, String description, String client, String createdDate, String expectedCompleteDate, String expectedPrice){
+    private String category;
+    public Job(String title, String description, String client, String createdDate, String expectedCompleteDate, String expectedPrice, String category){
         this.title=title;
         this.description=description;
         this.client=client;
         this.createdDate=createdDate;
         this.expectedCompleteDate=expectedCompleteDate;
         this.expectedPrice=expectedPrice;
+        this.category=category;
     }
     public String getId() {
         return id;
@@ -132,5 +134,13 @@ public class Job {
 
     public void setProposedPrice(String proposedPrice) {
         this.proposedPrice = proposedPrice;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

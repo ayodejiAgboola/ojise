@@ -69,9 +69,13 @@ public void sendMail(User user){
     public List<Job> listJobs(){
         return (List<Job>) jobDao.findAll();
     }
+    @PostMapping("/jobs/{category}")
+    public List<Job> listJobsbyCategory(@PathVariable String category){
+        return (List<Job>) jobDao.findByCategory(category);
+    }
     @PostMapping("/postjob")
     public PostJobResponse postJob(@RequestBody PostJobRequest request, HttpSession session){
-        Job job = new Job(request.getTitle(),request.getDescription(),session.getAttribute("user").toString(),new Date().toString(),request.getExpectedCompleteDate(),request.getExpectedPrice());
+        Job job = new Job(request.getTitle(),request.getDescription(),session.getAttribute("user").toString(),new Date().toString(),request.getExpectedCompleteDate(),request.getExpectedPrice(),request.getCategory());
         jobDao.save(job);
         return new PostJobResponse(job);
            }
