@@ -18,10 +18,8 @@ public class Job {
     private String assignedDate;
     private String CompleteDate;
     private String expectedCompleteDate;
-    private String proposedCompleteDate;
     private String price;
     private String expectedPrice;
-    private String proposedPrice;
     private String category;
     public Job(String title, String description, String client, String createdDate, String expectedCompleteDate, String expectedPrice, String category){
         this.title=title;
@@ -104,14 +102,6 @@ public class Job {
         this.expectedCompleteDate = expectedCompleteDate;
     }
 
-    public String getProposedCompleteDate() {
-        return proposedCompleteDate;
-    }
-
-    public void setProposedCompleteDate(String proposedCompleteDate) {
-        this.proposedCompleteDate = proposedCompleteDate;
-    }
-
     public String getPrice() {
         return price;
     }
@@ -126,14 +116,6 @@ public class Job {
 
     public void setExpectedPrice(String expectedPrice) {
         this.expectedPrice = expectedPrice;
-    }
-
-    public String getProposedPrice() {
-        return proposedPrice;
-    }
-
-    public void setProposedPrice(String proposedPrice) {
-        this.proposedPrice = proposedPrice;
     }
 
     public String getCategory() {
