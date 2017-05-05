@@ -4,7 +4,7 @@ package com.aretesoft.model;
  * Created by Ayodeji.Agboola on 4/6/2017.
  */
 public class MakeBidResponse {
-    private Bid bid = new Bid();
+    private Bid bid;
 
     public MakeBidResponse(Bid bid){
         this.setBid(bid);

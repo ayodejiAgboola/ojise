@@ -121,6 +121,11 @@ public void sendMail(User user, String content){
         user.setActive("1");
         return user;
     }
+    @PostMapping("forgotpassword/{email}")
+    public void forgotPassword(@PathVariable String email){
+        User user=userDao.findByEmail(email);
+        sendMail(user,"Link to send");
+    }
     /*@PostMapping("editUser")
     public User editUser(@RequestBody EditUserRequest request){}*/
 }
