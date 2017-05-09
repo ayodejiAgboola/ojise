@@ -31,7 +31,7 @@ public OjiseApi(UserDao userDao, JobDao jobDao, BidDao bidDao){
     this.bidDao=bidDao;
 }
 @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest request){
+    public RegisterResponse register(@RequestBody RegisterRequest request) throws InvalidEmailException{
 String username = request.getUsername();
 String password = BCrypt.hashpw(request.getPassword(),BCrypt.gensalt());
 String email = request.getEmail();
@@ -41,13 +41,17 @@ String userType = request.getUserType();
     sendMail(userDao.findByUsername(username),"Your account has been verified");
     return new RegisterResponse(userDao.findByUsername(username));
 }
-public void sendMail(User user, String content){
+public void sendMail(User user, String content) throws InvalidEmailException {
+        if(!user.getEmail().isEmpty()){
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("agboola.ayodeji.j@gmail.com");
             message.setTo(user.getEmail());
             message.setSubject("Test Ojise Mail");
             message.setText(content);
             mailSender.send(message);
+        }else{
+            throw new InvalidEmailException("Invalid User","001");
+        }
 }
 
     @PostMapping("/logout")
@@ -87,7 +91,7 @@ public void sendMail(User user, String content){
         return new PostJobResponse(job);
            }
      @PostMapping("/makebid")
-    public MakeBidResponse makeBid(@RequestBody MakeBidRequest makeBidRequest, HttpSession session){
+    public MakeBidResponse makeBid(@RequestBody MakeBidRequest makeBidRequest, HttpSession session) throws InvalidEmailException {
         Job job = jobDao.findById(makeBidRequest.getJobId());
         if (!job.getId().isEmpty()){
             Bid bid = new Bid(makeBidRequest.getJobId(),session.getAttribute("user").toString(),makeBidRequest.getBidDate(),makeBidRequest.getBidAmount(),makeBidRequest.getBidCompleteDate());
@@ -103,7 +107,7 @@ public void sendMail(User user, String content){
         return bidDao.findByJobId(jobId);
     }
     @PostMapping("confirmbid/{bidid}")
-    public Job confirmBid(@PathVariable String bidid){
+    public Job confirmBid(@PathVariable String bidid) throws InvalidEmailException {
         Bid bid  = bidDao.findById(bidid);
         Job job = jobDao.findById(bid.getJobId());
         if (!job.getId().isEmpty()){
@@ -121,9 +125,9 @@ public void sendMail(User user, String content){
         user.setActive("1");
         return user;
     }
-    @PostMapping("forgotpassword/{email}")
-    public void forgotPassword(@PathVariable String email){
-        User user=userDao.findByEmail(email);
+    @PostMapping("forgotpassword")
+    public void forgotPassword(@RequestBody ForgotPasswordRequest request) throws InvalidEmailException {
+        User user=userDao.findByEmail(request.getEmail());
         sendMail(user,"Link to send");
     }
     /*@PostMapping("editUser")
